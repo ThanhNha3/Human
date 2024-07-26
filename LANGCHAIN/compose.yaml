@@ -1,0 +1,10 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3003:8888"
+    environment:
+      - GEMINI_API_KEY=AIzaSyDuF7C9TEjKg0ITjpR0fkgHpTDK88-gZEE
+      - OPENAI_API_KEY=AIzaSyCoOUyRCHWeF6ThHkUqa0DcdEnGNQvX4IY
+      - PORT=8888

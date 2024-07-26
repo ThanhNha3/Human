@@ -1,0 +1,31 @@
+.background-image{
+    .stripe-vector {
+        position: absolute;
+        left: -80px;
+        top: 0;
+        z-index: -10;
+        animation: bmi-stripe-animation 10s linear infinite;
+        img{
+            vertical-align: middle;
+            border-style: none;
+        }
+    }
+    .img{
+        position: relative;
+        width: 100%;
+    }
+}
+
+@keyframes bmi-stripe-animation {
+    0% {
+      transform: translateX(-5%);
+    }
+    50% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-5%);
+    }
+  }
+  
+  

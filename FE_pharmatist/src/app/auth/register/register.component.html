@@ -1,0 +1,76 @@
+<!-- Section: Design Block -->
+<section>
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 d-flex justify-content-center align-items-center text-lg-start"
+        style="min-height: 100vh; background: rgb(2,0,36); background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(25,135,84,1) 35%, rgba(25,133,135,1) 100%);">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0 text-center d-none d-lg-block">
+                    <h2 class="my-5 display-3 fw-bold ls-tight text-white">
+                        Xin chào đến với <br />
+                        <span style="color:#35d98d">Pharmartist</span>
+                    </h2>
+                    <p style="color: hsl(165, 10%, 69%)">
+                        Hệ thống chúng tôi sẽ hỗ trợ bạn theo dõi sức khỏe một cách nhanh chống và hiệu quả nhất !
+                    </p>
+                </div>
+
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card shadow">
+                        <div class="card-body py-5 px-md-5">
+                            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example2">Họ và tên</label>
+                                    <input type="text" id="form3Example2" class="form-control"
+                                        placeholder="Họ và tên..." formControlName="fullname" />
+                                    <div
+                                        *ngIf="registerForm.get('fullname')?.invalid && (registerForm.get('fullname')?.dirty || registerForm.get('fullname')?.touched)">
+                                        <small class="text-danger"
+                                            *ngIf="registerForm.get('fullname')?.errors?.required">Vui lòng nhập họ và
+                                            tên</small>
+                                    </div>
+                                </div>
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example3">Số điện thoại</label>
+                                    <input type="text" id="form3Example3" class="form-control"
+                                        placeholder="Số điện thoại..." formControlName="phone" />
+                                    <div
+                                        *ngIf="registerForm.get('phone')?.invalid && (registerForm.get('phone')?.dirty || registerForm.get('phone')?.touched)">
+                                        <small class="text-danger"
+                                            *ngIf="registerForm.get('phone')?.errors?.required">Vui lòng nhập số điện
+                                            thoại</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('phone')?.errors?.pattern">Số
+                                            điện thoại phải là số</small>
+                                    </div>
+                                </div>
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example4">Mật khẩu</label>
+                                    <input type="password" id="form3Example4" class="form-control"
+                                        placeholder="Mật khẩu..." formControlName="password" />
+                                    <div
+                                        *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+                                        <small class="text-danger"
+                                            *ngIf="registerForm.get('password')?.errors?.required">Vui lòng nhập mật
+                                            khẩu</small>
+                                    </div>
+                                </div>
+
+
+                                <!-- Submit button -->
+                                <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                    class="btn btn-success btn-block mb-4 w-100">
+                                    Đăng ký
+                                </button>
+                                <div class="text-center w-100">
+                                    <a routerLink="/auth/login">Đăng nhập tài khoản</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->

@@ -1,0 +1,127 @@
+<section>
+  <div class="container">
+    <div class="p-4 shadow">
+      <h3 class="text-success fw-bold text-center mb-4">Đơn thuốc</h3>
+
+      <!-- Thông tin bệnh nhân -->
+      <div class="mb-4">
+        <h5 class="mb-3"><strong>Thông tin bệnh nhân</strong></h5>
+        <div class="table-responsive">
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr class="table-success">
+                <th scope="col ">Họ và tên</th>
+                <th scope="col">Giới tính</th>
+                <th scope="col">Tuổi</th>
+                <th scope="col">Số điện thoại</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  {{ prescriptionData?.user.fullname }}
+                </td>
+                <td class="align-middle">
+                  {{ prescriptionData?.user.gender }}
+                </td>
+                <td class="align-middle">
+                  {{ prescriptionData?.user.age }}
+                </td>
+                <td class="align-middle">
+                  {{ prescriptionData?.user.phone }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Thông tin chuẩn đoán -->
+        <h5 class="mb-3"><strong>Thông tin bác sĩ</strong></h5>
+        <div class="table-responsive">
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr class="table-success">
+                <th scope="col ">Mã đơn thuốc</th>
+                <th scope="col">Chuẩn đoán</th>
+                <th scope="col">Khoa khám</th>
+                <th scope="col">Triệu chứng</th>
+                <th scope="col">Dị ứng</th>
+                <th scope="col">Bệnh nền</th>
+                <th scope="col">Lưu ý</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  {{ prescriptionData?.prescription.id }}
+                </td>
+                <td class="align-middle">{{ sicknessName }}</td>
+                <td class="align-middle">{{ sicknessDepartment }}</td>
+                <td class="align-middle">
+                  {{ prescriptionData?.prescription.symptoms }}
+                </td>
+                <td class="align-middle">
+                  {{
+                    prescriptionData?.userAllergics?.length > 0
+                      ? prescriptionData.userAllergics.join(", ")
+                      : "không có"
+                  }}
+                </td>
+                <td class="align-middle">
+                  {{
+                    prescriptionData?.prescription.underlying_condition ||
+                      "Không có"
+                  }}
+                </td>
+                <td class="align-middle">
+                  {{ prescriptionData?.prescription.note || "Không có" }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bảng thuốc điều trị -->
+      <div class="mt-4">
+        <h5 class="mb-3"><strong>Thuốc điều trị</strong></h5>
+        <div class="table-responsive">
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr class="bg-success-subtle">
+                <th scope="col">Tên thuốc</th>
+                <th scope="col">Đơn vị</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Cách dùng / liều dùng</th>
+                <th scope="col">Giá thành</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of newMedicineArray">
+                <td class="align-middle">{{ item?.name }}</td>
+                <td class="align-middle">{{ item?.unit }}</td>
+                <td class="align-middle">{{ item?.quantity }}</td>
+                <td class="align-middle">{{ item?.dosage }}</td>
+                <td class="align-middle">
+                  {{ formatCurrency(item?.price) }} VNĐ
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-end pb-4 fw-bold">
+            Tổng tiền: {{ formatCurrency(total_money) }} VNĐ
+          </div>
+          <a class="btn btn-success" routerLink="/bac-si"> Quay lại </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<ngx-spinner
+  bdColor=" rgb(255,255,255)"
+  size="medium"
+  color="#198754"
+  type="ball-clip-rotate-pulse"
+  [fullScreen]="true"
+>
+  <p class="text-success w-100 mt-lg-5">Hệ thống đang xử lý...</p>
+</ngx-spinner>

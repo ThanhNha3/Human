@@ -1,0 +1,35 @@
+.input-none {
+  outline: none;
+  height: 38px;
+  min-width: 300px;
+  border-radius: 5px;
+}
+
+input:focus {
+  outline: black solid 1px;
+}
+
+.custom-input-edit {
+  position: relative;
+  max-width: 600px;
+  height: 38px;
+
+  input {
+    position: absolute;
+    border-radius: 5px;
+    width: 100%;
+    height: 38px;
+    // padding-right: 100px;
+    padding: 8px 100px 8px 10px;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: -12px;
+  }
+}

@@ -1,0 +1,55 @@
+<div class="table-responsive">
+  <table class="table table-hover align-middle">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tên thuốc</th>
+        <th scope="col">Đơn vị</th>
+        <th scope="col">Số lượng</th>
+        <th scope="col">Cách dùng / liều dùng</th>
+        <th scope="col">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="isSoftManipulation ? tempMedicinesData : medicines">
+      <tr *ngFor="let medicine of (isSoftManipulation ? tempMedicinesData : medicines); let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          <span>{{ medicine.name }}</span>
+        </td>
+        <td>
+          <span>{{ medicine.unit }}</span>
+        </td>
+        <td>
+          <input *ngIf="medicine.isEditing" [(ngModel)]="medicine.quantity" class="form-control" />
+          <span *ngIf="!medicine.isEditing">{{ medicine.quantity }}</span>
+        </td>
+        <td>
+          <input *ngIf="medicine.isEditing" [(ngModel)]="medicine.dosage" class="form-control" />
+          <span *ngIf="!medicine.isEditing">{{ medicine.dosage }}</span>
+        </td>
+        <td>
+          <div class="d-inline-block" *ngIf="!medicine.isEditing">
+            <a (click)="enableEdit(medicine)"
+              class="btn btn-outline-info d-inline-flex justify-content-center align-items-center p-2 me-2">
+              <i class="fas fa-edit"></i>
+            </a>
+            <a (click)="deleteUserAction(medicine.id)"
+              class="btn btn-outline-danger d-inline-flex justify-content-center align-items-center p-2 border rounded-1">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+          </div>
+          <div *ngIf="medicine.isEditing">
+            <a (click)="saveEdit(medicine)"
+              class="btn btn-outline-success d-inline-flex justify-content-center align-items-center p-2 me-2">
+              <i class="fas fa-check"></i>
+            </a>
+            <a (click)="cancelEdit(medicine)"
+              class="btn btn-outline-warning d-inline-flex justify-content-center align-items-center p-2 border rounded-1">
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

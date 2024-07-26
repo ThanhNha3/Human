@@ -1,0 +1,221 @@
+<section class="shadow-sm rounded-2">
+  <div>
+    <div class="alert alert-danger fs-3" role="alert" *ngIf="isDataInvalid">
+      {{missingFieldsMessage}}
+    </div>
+    <!-- Hiển thị form chỉnh sửa nếu isDataInvalid là true -->
+    <div>
+      <form [formGroup]="userForm" *ngIf="isDataInvalid; else userInfoCard" (ngSubmit)="onEditInfo()" class="p-3">
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">
+            <label for="fullname" class="form-label">Họ và tên:</label>
+            <input type="text" class="form-control" [class.border-danger]="userForm.get('fullname')?.errors?.required"
+              id="fullname" formControlName="fullname">
+            <div
+              *ngIf="userForm.get('fullname')?.invalid && (userForm.get('fullname')?.dirty || userForm.get('fullname')?.touched)">
+              <small class="text-danger" *ngIf="userForm.get('fullname')?.errors?.required">Vui lòng nhập họ và
+                tên</small>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="numberphone" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" id="numberphone" formControlName="phone"
+              [class.border-danger]="userForm.get('fullname')?.errors?.required">
+            <div
+              *ngIf="userForm.get('phone')?.invalid && (userForm.get('phone')?.dirty || userForm.get('phone')?.touched)">
+              <small class="text-danger" *ngIf="userForm.get('phone')?.errors?.required">Vui lòng số điện thoại</small>
+              <small class="text-danger" *ngIf="userForm.get('phone')?.errors?.pattern">Số điện thoại phải là số</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">
+            <label for="age" class="form-label">Độ tuổi</label>
+            <input type="text" class="form-control" id="age" formControlName="age"
+              [class.border-danger]="userForm.get('fullname')?.errors?.required">
+            <div *ngIf="userForm.get('age')?.invalid && (userForm.get('age')?.dirty || userForm.get('age')?.touched)">
+              <small class="text-danger" *ngIf="userForm.get('age')?.errors?.required">Vui lòng độ tuổi</small>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">Giới tính</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="nam"
+                formControlName="gender">
+              <label class="form-check-label" for="inlineRadio1">Nam</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="nữ"
+                formControlName="gender">
+              <label class="form-check-label" for="inlineRadio2">Nữ</label>
+            </div>
+            <div
+              *ngIf="userForm.get('gender')?.invalid && (userForm.get('gender')?.dirty || userForm.get('gender')?.touched)">
+              <small class="text-danger" *ngIf="userForm.get('gender')?.errors?.required">Vui lòng chọn giới
+                tính</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">
+            <label for="symptom" class="form-label">Triệu chứng</label>
+            <input type="text" class="form-control" id="symptom" formControlName="symptom"
+              [class.border-danger]="userForm.get('fullname')?.errors?.required">
+            <div
+              *ngIf="userForm.get('symptom')?.invalid && (userForm.get('symptom')?.dirty || userForm.get('symptom')?.touched)">
+              <small class="text-danger" *ngIf="userForm.get('symptom')?.errors?.required">Vui lòng nhập triệu
+                chứng</small>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="underlying" class="form-label">Bệnh nền</label>
+            <input type="text" class="form-control" id="underlying" formControlName="underlying_condition">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-12">
+            <label for="allergic" class="form-label">Dị ứng</label>
+            <input type="text" class="form-control" id="allergic" formControlName="allergic">
+          </div>
+        </div>
+        <div class="d-flex justify-content-center w-100 column-gap-2"></div>
+        <button class="btn btn-secondary me-2" (click)="onBack()">Quay lại</button>
+        <button type="submit" class="btn btn-success" [disabled]="userForm.invalid">Xác nhận</button>
+      </form>
+    </div>
+
+    <!-- Hiển thị card thông tin nếu isDataInvalid là false -->
+    <ng-template #userInfoCard>
+      <div class="card border-0 shadow" *ngIf="user_info && !user_prescription">
+        <div class="card-body">
+          <h5 class="text-success fw-bold mb-3">Xác nhận thông tin</h5>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center" *ngIf="user_prescription">
+              <p class="m-0"><strong>Mã đơn:</strong> 123</p>
+              <p class="m-0 d-none d-lg-block"><strong>17/06/2024</strong></p>
+            </div>
+            <div class="mb-2">
+              <p class="m-0"><strong>Họ và tên: </strong>{{user_info.fullname ?? 'Không'}}</p>
+              <p class="m-0"><strong>Giới tính: </strong>{{user_info?.gender ?? 'Không'}}</p>
+              <p class="m-0"><strong>Độ tuổi: </strong>{{user_info?.age ?? 'Không'}}</p>
+              <p class="m-0"><strong>Số điện thoại: </strong>{{user_info?.phone ?? 'Không'}}</p>
+              <p class="m-0"><strong>Triệu chứng: </strong>{{user_info?.symptom ?? 'Không'}}</p>
+              <p class="m-0"><strong>Bệnh nền: </strong>{{user_info?.underlying_condition ?? 'Không'}}</p>
+              <p class="m-0"><strong>Thành phần dị ứng: </strong>{{(user_info?.allergic ?? []) | join: ', '}}</p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center row">
+            <p class="text-danger m-0 mb-2 col-lg-6">Vui lòng kiểm tra lại thông tin cá nhân!</p>
+            <div class="d-flex gap-2 mb-2 col-lg-5" *ngIf="!user_prescription">
+              <button class="btn btn-outline-success w-50" data-bs-toggle="modal" data-bs-target="#exampleModal">Chỉnh
+                sửa</button>
+              <button class="btn btn-success w-50" (click)="onConfirmInfo()">Xác nhận</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <div class="card border-0" *ngIf="user_prescription">
+      <div class="card-body text-center">
+        <h3 class="text-success">Đơn khám</h3>
+        <!-- <h3>Chuẩn đoán sơ bộ: {{ user_prescription?.name }}</h3> -->
+        <h3>Khoa khám: {{ user_prescription?.department }}</h3>
+        <div class="d-flex justify-content-center my-3">
+          <button class="btn btn-success w-50" (click)="onAccept()">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal edit -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  *ngIf="user_info">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa thông tin</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closeButton></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userForm" (ngSubmit)="onEditInfo()">
+          <div class="row mb-3">
+            <div class="col-12 col-md-6">
+              <label for="fullname" class="form-label">Họ và tên:</label>
+              <input type="text" class="form-control" id="fullname" formControlName="fullname">
+              <div
+                *ngIf="userForm.get('fullname')?.invalid && (userForm.get('fullname')?.dirty || userForm.get('fullname')?.touched)">
+                <small class="text-danger" *ngIf="userForm.get('fullname')?.errors?.required">Vui lòng nhập họ và
+                  tên</small>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="numberphone" class="form-label">Số điện thoại</label>
+              <input type="text" class="form-control" id="numberphone" formControlName="phone">
+              <div
+                *ngIf="userForm.get('phone')?.invalid && (userForm.get('phone')?.dirty || userForm.get('phone')?.touched)">
+                <small class="text-danger" *ngIf="userForm.get('phone')?.errors?.required">Vui lòng nhập số điện
+                  thoại</small>
+                <small class="text-danger" *ngIf="userForm.get('phone')?.errors?.pattern">Vui lòng nhập số điện thoại
+                  hợp lệ</small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-md-6">
+              <label for="age" class="form-label">Độ tuổi</label>
+              <input type="text" class="form-control" id="age" formControlName="age">
+              <div *ngIf="userForm.get('age')?.invalid && (userForm.get('age')?.dirty || userForm.get('age')?.touched)">
+                <small class="text-danger" *ngIf="userForm.get('age')?.errors?.required">Vui lòng nhập độ tuổi</small>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label">Giới tính</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="nam"
+                  formControlName="gender">
+                <label class="form-check-label" for="inlineRadio1">Nam</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="nữ"
+                  formControlName="gender">
+                <label class="form-check-label" for="inlineRadio2">Nữ</label>
+              </div>
+              <div
+                *ngIf="userForm.get('gender')?.invalid && (userForm.get('gender')?.dirty || userForm.get('gender')?.touched)">
+                <small class="text-danger" *ngIf="userForm.get('gender')?.errors?.required">Vui lòng chọn giới
+                  tính</small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-md-6">
+              <label for="symptom" class="form-label">Triệu chứng</label>
+              <input type="text" class="form-control" id="symptom" formControlName="symptom">
+              <div
+                *ngIf="userForm.get('symptom')?.invalid && (userForm.get('symptom')?.dirty || userForm.get('symptom')?.touched)">
+                <small class="text-danger" *ngIf="userForm.get('symptom')?.errors?.required">Vui lòng nhập triệu
+                  chứng</small>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="underlying" class="form-label">Bệnh nền</label>
+              <input type="text" class="form-control" id="underlying" formControlName="underlying_condition">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12">
+              <label for="allergic" class="form-label">Dị ứng</label>
+              <input type="text" class="form-control" id="allergic" formControlName="allergic">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success w-100" [disabled]="userForm.invalid">Xác nhận</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor=" rgb(255,255,255)" size="medium" color="#198754" type="ball-clip-rotate-pulse"
+  [fullScreen]="true">
+  <p class="text-success w-100 mt-lg-5">Hệ thống đang xử lý...</p>
+</ngx-spinner>

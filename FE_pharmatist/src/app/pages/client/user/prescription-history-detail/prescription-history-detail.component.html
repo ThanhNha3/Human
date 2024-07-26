@@ -1,0 +1,88 @@
+<section>
+    <div class="container">
+        <div class="p-4 shadow">
+            <h3 class="text-success fw-bold text-center mb-4">Lịch sử đơn thuốc</h3>
+
+            <!-- Thông tin bệnh nhân -->
+            <div class="mb-4">
+                <h5 class="mb-3"><strong>Thông tin bệnh nhân</strong></h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr class=" table-success">
+                                <th scope="col ">Họ và tên</th>
+                                <th scope="col">Giới tính </th>
+                                <th scope="col">Tuổi</th>
+                                <th scope="col">Số điện thoại</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle"> {{ prescriptionMedicine?.user.fullname }} </td>
+                                <td class="align-middle"> {{ prescriptionMedicine?.user.gender }} </td>
+                                <td class="align-middle"> {{ prescriptionMedicine?.user.age }} </td>
+                                <td class="align-middle"> {{ prescriptionMedicine?.user.phone }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- Thông tin chuẩn đoán -->
+                <h5 class="mb-3"><strong>Thông tin bệnh nhân</strong></h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr class=" table-success">
+                                <th scope="col ">Mã đơn thuốc</th>
+                                <th scope="col">Bác sĩ kê đơn</th>
+                                <th scope="col">Chuẩn đoán</th>
+                                <th scope="col">Lưu ý</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle">{{prescriptionMedicine?.prescription.id}}</td>
+                                <td class="align-middle">{{prescriptionMedicine?.doctor.fullname}}</td>
+                                <td class="align-middle">{{ sickness ?? [] | join : ", " }}</td>
+                                <td class="align-middle">{{ prescriptionMedicine?.note }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- Bảng thuốc điều trị -->
+            <div class="mt-4">
+                <h5 class="mb-3"><strong>Thuốc điều trị</strong></h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                          <tr class="bg-success-subtle">
+                            <th scope="col">Tên thuốc</th>
+                            <th scope="col">Đơn vị</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Cách dùng / liều dùng</th>
+                            <th scope="col">Giá thành</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let medicine of prescriptionMedicine?.medicines">
+                            <td class="align-middle">{{ medicine.name }}</td>
+                            <td class="align-middle">{{ medicine.unit }}</td>
+                            <td class="align-middle">{{ medicine.quantity }}</td>
+                            <td class="align-middle">{{ medicine.dosage }}</td>
+                            <td class="align-middle">
+                              {{ formatCurrency(medicine.price) }} VNĐ
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="d-flex justify-content-end pb-4 fw-bold">
+                        Tổng tiền: {{ formatCurrency(total_money) }} VNĐ
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

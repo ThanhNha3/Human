@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg bg-success fixed-top w-100 shadow ">
+  <div class="container py-lg-2">
+    <a [routerLink]="checkRoleToken === 'doctor' ? ['/bac-si'] : checkRoleToken === 'pharmartist' ? ['/duoc-si'] : ['/']"
+      class="navbar-brand d-inline-flex link-body-emphasis text-decoration-none">
+      <h4 class="text-white">Pharmartist</h4>
+    </a>
+    <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <!-- <span class="navbar-toggler-icon text-white"></span> -->
+      <i class="fa-solid fa-bars text-white fs-4"></i>
+    </button>
+    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <!-- <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Pharmartist</h5> -->
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column justify-content-between flex-lg-row justify-content-lg-start ">
+        <ul *ngIf="checkRoleToken == 'user' "
+          class="navbar-nav justify-content-start justify-content-lg-center flex-grow-1 pe-3 text-center">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/lich-su-don-thuoc">Lịch sử bệnh lý</a>
+          </li>
+        </ul>
+        <ul *ngIf="checkRoleToken == 'doctor' "
+          class="navbar-nav justify-content-start justify-content-lg-center flex-grow-1 pe-3 text-center">
+        </ul>
+        <ul *ngIf="checkRoleToken == 'pharmartist' "
+          class="navbar-nav justify-content-start justify-content-lg-center flex-grow-1 pe-3 text-center">
+        </ul>
+        <div class="d-flex justify-content-center column-gap-1 row-gap-1 flex-column flex-lg-row" *ngIf="!isLogged">
+          <button routerLink="/auth/login" class="btn btn-outline-light btn-primary-custom">Đăng nhập</button>
+          <button routerLink="/auth/register" class="btn btn-light text-success btn-secondary-custom">Đăng ký</button>
+        </div>
+        <div class="d-flex justify-content-center column-gap-1 row-gap-1 flex-column flex-lg-row" *ngIf="isLogged">
+          <button class="btn btn-outline-light btn-primary-custom" (click)="logout()">Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

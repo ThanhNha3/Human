@@ -1,0 +1,10 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - API_URL=http://localhost:3004/api
+    ports:
+      - "3005:80"

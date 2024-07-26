@@ -1,0 +1,166 @@
+<section>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="w-75">
+      <div
+        class="d-flex justify-content-center align-items-center bg-white p-4"
+        style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; border-radius: 5px"
+      >
+        <div class="w-100">
+          <ul class="nav nav-pills mb-3 d-flex justify-content-between" id="pills-tab" role="tablist">
+            <div class="d-flex gap-4">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="home-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#home-tab-pane"
+                  type="button"
+                  role="tab"
+                  aria-controls="home-tab-pane"
+                  aria-selected="true"
+                >
+                  Đơn chưa bốc
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="profile-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#profile-tab-pane"
+                  type="button"
+                  role="tab"
+                  aria-controls="profile-tab-pane"
+                  aria-selected="false"
+                >
+                  Đơn đã bốc
+                </button>
+              </li>
+            </div>
+            <div>
+              <li>
+                <div class="input-group" style="height: 40px;">
+                  <div class="form-outline" data-mdb-input-init>
+                    <input id="search-input" type="search" class="form-control h-100" [(ngModel)]="searchTerm" (keyup.enter)="performSearch()" />
+                  </div>
+                  <button class="btn btn-success h-100" id="search-button" type="button" (click)="performSearch()">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </li>
+            </div>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="home-tab-pane"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+              tabindex="0"
+            >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Mã đơn</th>
+                    <th scope="col">Họ và tên</th>
+                    <th scope="col">Ngày khám</th>
+                    <th scope="col">Xem chi tiết</th>
+                    <th scope="col">Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container
+                    *ngFor="let prescriptionMedicine of prescriptionMedicines"
+                  >
+                    <tr *ngIf="prescriptionMedicine.isAccepted === false">
+                      <th scope="row">
+                        {{ prescriptionMedicine.prescriptionId }}
+                      </th>
+                      <th>{{ prescriptionMedicine.user.fullname }}</th>
+                      <td>{{ prescriptionMedicine.created_at }}</td>
+                      <td>
+                        <a
+                          href="/duoc-si/chi-tiet-don-thuoc/{{
+                            prescriptionMedicine.user.id
+                          }}/{{ prescriptionMedicine.prescriptionId }}"
+                          class="btn btn-outline-success"
+                          >Chi tiết</a
+                        >
+                      </td>
+                      <td>
+                        <button class="btn btn-secondary">Chưa bốc</button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <!-- đơn đã đã duyệt -->
+            <div
+              class="tab-pane fade"
+              id="profile-tab-pane"
+              role="tabpanel"
+              aria-labelledby="profile-tab"
+              tabindex="0"
+            >
+              <!--  -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Mã đơn</th>
+                    <th scope="col">Họ và tên</th>
+                    <th scope="col">Ngày khám</th>
+                    <th scope="col">Xem chi tiết</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Bàn giao</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container
+                    *ngFor="let prescriptionMedicine of prescriptionMedicines"
+                  >
+                    <tr *ngIf="prescriptionMedicine.isAccepted === true">
+                      <th scope="row">
+                        {{ prescriptionMedicine.prescriptionId }}
+                      </th>
+                      <th>{{ prescriptionMedicine.user.fullname }}</th>
+                      <td>{{ prescriptionMedicine.created_at }}</td>
+                      <td>
+                        <a
+                          href="/duoc-si/chi-tiet-don-thuoc/{{
+                            prescriptionMedicine.user.id
+                          }}/{{ prescriptionMedicine.prescriptionId }}"
+                          class="btn btn-outline-success"
+                          >Chi tiết</a
+                        >
+                      </td>
+                      <td><button class="btn btn-success">Đã bốc</button></td>
+                      <td>
+                        <button
+                          class="btn"
+                          [ngClass]="{
+                            'btn-success': prescriptionMedicine.isHanded,
+                            'btn-secondary': !prescriptionMedicine.isHanded
+                          }"
+                        >
+                          {{
+                            prescriptionMedicine.isHanded
+                              ? "Đã bàn giao"
+                              : "chưa bàn giao"
+                          }}
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div *ngIf="prescriptionMedicines.length === 0">
+            <p>chưa có đơn thuốc</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

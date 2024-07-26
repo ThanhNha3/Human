@@ -1,0 +1,39 @@
+<!-- Section: Design Block -->
+<section>
+    <div class="d-flex justify-content-center align-items-center vh-100 px-4" style="background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(25,135,84,1) 35%, rgba(25,133,135,1) 100%);">
+        <div class="card shadow rounded" style="width: 500px;">
+            <div class="card-body py-5 px-md-5">
+                <h2 class="text-center text-success mb-5">Đăng nhập</h2>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="form3Example3">Số điện thoại</label>
+                        <input type="text" id="form3Example3" class="form-control" placeholder="Số điện thoại..."
+                            formControlName="phone" />
+                        <div
+                            *ngIf="loginForm.get('phone')?.invalid && (loginForm.get('phone')?.dirty || loginForm.get('phone')?.touched)">
+                            <small class="text-danger" *ngIf="loginForm.get('phone')?.errors?.required">Vui lòng nhập
+                                số điện
+                                thoại</small>
+                            <small class="text-danger" *ngIf="loginForm.get('phone')?.errors?.pattern">Số
+                                điện thoại phải là số</small>
+                        </div>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="form3Example4">Mật khẩu</label>
+                        <input type="password" id="form3Example4" class="form-control" placeholder="Mật khẩu..."
+                            formControlName="password" />
+                    </div>
+                    <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                        class="btn btn-success btn-block mb-4 w-100">
+                        Đăng nhập
+                    </button>
+                    <div class="text-center w-100">
+                        <a routerLink="/auth/register">Đăng ký tài khoản</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section: Design Block -->

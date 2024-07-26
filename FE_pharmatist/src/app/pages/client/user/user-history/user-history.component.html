@@ -1,0 +1,24 @@
+<section>
+    <div *ngIf="prescriptions.length>0">
+        <div class="d-flex justify-content-center align-items-center w-100">
+            <div class="bg-white rounded w-100" *ngFor="let prescriptions of prescriptions">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="text-success fw-bold mb-3">Lịch sử đơn</h5>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="m-0"><strong>Mã đơn:</strong> {{ prescriptions.id }}</p>
+                                <p class="m-0 d-none d-lg-block"><strong>{{ prescriptions.createdAt }}</strong></p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end align-items-center row">
+                            <a routerLink="/lich-su-don-thuoc/{{prescriptions.id}}"
+                                class="btn btn-success col-lg-2 col-ms-12">Xem đơn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p *ngIf="prescriptions.length==0" class="fw-medium text-center">Bạn chưa khám bệnh tại Pharmartist</p>
+</section>

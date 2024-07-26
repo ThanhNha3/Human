@@ -1,0 +1,47 @@
+<section>
+  <div class="container">
+    <div class="card border-0 shadow">
+      <div class="card-body py-4">
+        <h4 class="display-5 fw-bold text-center text-success fw-bold mb-4">
+          Pharmartist
+        </h4>
+        <div class="d-flex justify-content-between row mb-3">
+          <div class="col-lg-6 col-ms-12">
+            <div class="text-center">
+              <h4 class="mb-2 fs-5 text-success">
+                Những thông tin cần cung cấp
+              </h4>
+              <p>Họ và tên - Giới tính - Tuổi - Số điện thoại</p>
+              <p>Triệu chứng bệnh - Bệnh nền - Thành phần dị ứng</p>
+            </div>
+          </div>
+          <!-- <div class="col-lg-6 col-ms-12">
+            <div class="text-center">
+              <h4 class="text-success mb-2 fs-5 ">Ví dụ</h4>
+              <div class="audio-container mx-auto" style="max-width: 300px;">
+                <app-audio-player></app-audio-player>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <h4 class="text-center mt-5 fw-bold text-uppercase text-success">
+          Nhấn để ghi âm
+        </h4>
+        <div class="d-flex justify-content-center w-100 mt-3">
+          <app-audio-recorder
+            (fileUploaded)="onFileUploaded($event)"
+          ></app-audio-recorder>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<ngx-spinner
+  bdColor=" rgb(255,255,255)"
+  size="medium"
+  color="#198754"
+  type="ball-clip-rotate-pulse"
+  [fullScreen]="true"
+>
+  <p class="text-success w-100 mt-lg-5">Hệ thống đang xử lý...</p>
+</ngx-spinner>
