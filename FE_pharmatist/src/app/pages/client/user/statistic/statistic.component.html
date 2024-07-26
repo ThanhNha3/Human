@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center align-items-center gap-1">
+  <div class="py-2 px-3 rounded-2 bg-secondary text-white fw-medium" style="user-select: none; cursor: pointer;">Thống
+    kê A</div>
+  <div class="py-2 px-3 rounded-2 bg-secondary text-white fw-medium" style="user-select: none; cursor: pointer;">Thống
+    kê B</div>
+  <div class="py-2 px-3 rounded-2 bg-secondary text-white fw-medium" style="user-select: none; cursor: pointer;">Thống
+    kê C</div>
+</div>
+
+<div class="row row-gap-2 flex-column-reverse flex-md-row">
+  <div class=" col-md-6">
+    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="selectedChart" [legend]="showLegend"
+      [labels]="showLabels" [doughnut]="isDoughnut" [legendPosition]="legendPosition" (select)="onSelect($event)"
+      (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+    </ngx-charts-pie-chart>
+  </div>
+  <div class="col-md-6 p-2 d-flex flex-column gap-2 align-items-center align-content-start ">
+    <div *ngFor="let chart of multiple; let i = index">
+      <input type="radio" [id]="'chart' + i" name="chart" (change)="onChartChange(i)" [checked]="i === 0" />
+      <label class="d-inline-block ms-2" [for]="'chart' + i">{{ chart.name }}</label>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,9 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/lich-su-don-thuoc">Lịch sử bệnh lý</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/thong-ke">Thống kê</a>
+          </li>
         </ul>
         <ul *ngIf="checkRoleToken == 'doctor' "
           class="navbar-nav justify-content-start justify-content-lg-center flex-grow-1 pe-3 text-center">
@@ -34,6 +37,29 @@
         <div class="d-flex justify-content-center column-gap-1 row-gap-1 flex-column flex-lg-row" *ngIf="!isLogged">
           <button routerLink="/auth/login" class="btn btn-outline-light btn-primary-custom">Đăng nhập</button>
           <button routerLink="/auth/register" class="btn btn-light text-success btn-secondary-custom">Đăng ký</button>
+          <div *ngIf="isLogged" class="dropdown">
+            <div class="btn-notifition" style="width: 40px; height: 40px;" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <button class="border-0 rounded-circle w-100 h-100">
+                <i class="fa-solid fa-bell"></i>
+              </button>
+              <div
+                class="border-0 rounded-circle bg-danger d-flex justify-content-center align-items-center text-white badge"
+                style="width: 18px; height: 18px; font-size: 12px;">
+                1
+              </div>
+            </div>
+            <ul class="dropdown-menu shadow-lg border-0 p-3" style="width: 500px !important; left: -400px !important">
+              <div class="d-flex justify-content-between align-items-center border border-1 p-3 rounded-3 mb-3">
+                <p>Bạn có lịch uống thuốc <strong>buổi sáng</strong></p>
+                <p><a href="">chi tiết đơn thuốc</a></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center border border-1 p-3 rounded-3 mb-3">
+                <p>Bạn có lịch uống thuốc <strong>buổi sáng</strong></p>
+                <p><a href="">chi tiết đơn thuốc</a></p>
+              </div>
+            </ul>
+          </div>
         </div>
         <div class="d-flex justify-content-center column-gap-1 row-gap-1 flex-column flex-lg-row" *ngIf="isLogged">
           <button class="btn btn-outline-light btn-primary-custom" (click)="logout()">Đăng xuất</button>

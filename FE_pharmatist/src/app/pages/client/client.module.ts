@@ -25,6 +25,8 @@ import { JoinPipe } from 'src/app/@core/pipe/join.pipe';
 import { UserConfirmComponent } from './user/user-confirm/user-confirm.component';
 import { DoctorHistoryDetailComponent } from './doctor/doctor-history-detail/doctor-history-detail.component';
 import { ErrorComponent } from './error/error.component';
+import { StatisticComponent } from './user/statistic/statistic.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [
     ClientComponent,
@@ -46,6 +48,7 @@ import { ErrorComponent } from './error/error.component';
     UserConfirmComponent,
     DoctorHistoryDetailComponent,
     ErrorComponent,
+    StatisticComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +57,7 @@ import { ErrorComponent } from './error/error.component';
     ClientRoutingModule,
     NgxSpinnerModule,
     DragDropModule,
+    NgxChartsModule,
   ],
 })
 export class ClientModule {}

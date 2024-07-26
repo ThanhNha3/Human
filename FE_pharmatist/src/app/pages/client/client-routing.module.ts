@@ -12,6 +12,7 @@ import { PharmartistMedicineComponent } from './pharmartist/pharmartist-medicine
 import { DoctorPrescriptionComponent } from './doctor/doctor-prescription/doctor-prescription.component';
 import { DoctorHistoryDetailComponent } from './doctor/doctor-history-detail/doctor-history-detail.component';
 import { UserConfirmComponent } from './user/user-confirm/user-confirm.component';
+import { StatisticComponent } from './user/statistic/statistic.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     children: [
       { path: '', component: UserHomeComponent },
       { path: 'tu-van-suc-khoe', component: HealthAdviceComponent },
+      { path: 'thong-ke', component: StatisticComponent },
       { path: 'lich-su-don-thuoc', component: UserHistoryComponent },
       { path: 'xac-nhan-thong-tin', component: UserConfirmComponent },
       { path: 'bac-si', component: DoctorHomeComponent },
