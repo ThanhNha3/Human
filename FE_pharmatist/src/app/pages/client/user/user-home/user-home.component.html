@@ -1,6 +1,6 @@
 <section>
   <div class="container">
-    <div class="card border-0 shadow">
+    <div class="card border-0 shadow mb-3">
       <div class="card-body py-4">
         <h4 class="display-5 fw-bold text-center text-success fw-bold mb-4">
           Pharmartist
@@ -35,6 +35,16 @@
           <div class="d-flex justify-content-center w-100 mt-3">
             <app-audio-recorder (fileUploaded)="onFileUploaded($event)"></app-audio-recorder>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="card border-0 shadow text-center py-3">
+      <div class="">
+        <i class="fa-solid fa-circle-exclamation text-danger fs-5"></i>        
+        <h3 class="text-danger">Bạn đang mâu thuẫn trong triệu chứng của bạn</h3>
+        <div class="d-flex justify-content-center align-items-center gap-2">
+          <button class="btn btn-secondary">Xác nhận đúng</button>
+          <button class="btn btn-success">Ghi lại</button>
         </div>
       </div>
     </div>
