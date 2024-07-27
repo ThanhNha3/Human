@@ -7,12 +7,12 @@ class UserController {
         try {
             const { fullname, phone, allergic, gender, age } = req.body
             const existedUser = await userService.findByPhone(phone)
-            if(existedUser){
+            if (existedUser) {
                 return res.status(200).json({
-                   data: {
-                    id: existedUser.id,
-                    phone: existedUser.phone,
-                } 
+                    data: {
+                        id: existedUser.id,
+                        phone: existedUser.phone,
+                    }
                 })
             }
             const passwordHash = await bcrypt.hash(phone, 10)
@@ -57,6 +57,19 @@ class UserController {
             const user = await userService.update(data, id)
             res.status(201).json({
                 user
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async findNewSymptombyUserId(req, res) {
+        try {
+            console.log("jejee");
+            const user_id = Number(req.params.user_id)
+            console.log(user_id);
+            const results = await userService.findNewSymptombyUserId({ user_id })
+            res.status(201).json({
+                results
             })
         } catch (error) {
             console.log(error);

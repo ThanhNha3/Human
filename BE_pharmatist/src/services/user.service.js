@@ -1,3 +1,4 @@
+const sequelize = require("../config/db")
 const { UserModel } = require("../models/index")
 
 class UserService {
@@ -27,6 +28,33 @@ class UserService {
         try {
             return await UserModel.update(data, { where: { id } })
         } catch (error) {
+            return error
+        }
+    }
+    async findNewSymptombyUserId(req) {
+        const { user_id } = req;
+        try {
+            const query = `
+SELECT
+    p.symptoms
+FROM
+    prescriptions p
+JOIN users u ON
+    u.id = p.created_by
+WHERE
+    u.id = :user_id
+ORDER BY
+    p.id
+DESC
+LIMIT 1;
+            `;
+            const results = await sequelize.query(query, {
+                type: sequelize.QueryTypes.SELECT,
+                replacements: { user_id }
+            });
+            return results;
+        }
+        catch (error) {
             return error
         }
     }
