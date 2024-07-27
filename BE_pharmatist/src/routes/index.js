@@ -25,5 +25,6 @@ app.use("/doctor", require("./doctor.routes.js"))
 app.use("/ai-record", require("./record.routes.js"))
 app.use("/departments", require("./department.routes.js"))
 app.use("/admin", require("./admin.routes.js"))
+app.use("/langchain", require("./langchain.routes.js"))
 
 module.exports = app
