@@ -54,7 +54,8 @@ export class JWTInterceptor implements HttpInterceptor {
       (method === 'POST' && url.includes('/users')) ||
       url.includes('generate-diagnosis') ||
       url.includes('/transcript') ||
-      url.includes('/hash-info')
+      url.includes('/hash-info') ||
+      url.includes('/admin')
     );
   }
 }

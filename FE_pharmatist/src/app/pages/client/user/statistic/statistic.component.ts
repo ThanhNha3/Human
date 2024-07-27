@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/@core/service/admin.service';
 
 @Component({
   selector: 'app-statistic',
@@ -6,34 +7,15 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./statistic.component.scss'],
 })
 export class StatisticComponent implements OnInit {
-  multiple: any[] = [
-    {
-      name: '0 - 9',
-      data: [
-        { name: 'Bệnh A', value: 9 },
-        { name: 'Bệnh G', value: 4 },
-        { name: 'Bệnh H', value: 3 },
-      ],
-    },
-    {
-      name: '10 - 19',
-      data: [
-        { name: 'Bệnh A', value: 15 },
-        { name: 'Bệnh B', value: 10 },
-        { name: 'Bệnh C', value: 6 },
-      ],
-    },
-    {
-      name: '20 - 29',
-      data: [
-        { name: 'Bệnh A', value: 30 },
-        { name: 'Bệnh E', value: 10 },
-        { name: 'Bệnh F', value: 5 },
-      ],
-    },
-  ];
+  sicknesses: any[] = [];
+  userByAgeGroup: any[] = [];
+  averageByAgeGroup: any[] = [];
 
-  selectedChart: any[] = this.multiple[0].data;
+  tab: string = 'sickness';
+
+  // selectedChart: any[] = this.sicknesses[0].data;
+  selectedChart: any[] = [];
+  selectedChartIndex: number = 0;
 
   view: [number, number] = [700, 400];
 
@@ -49,7 +31,7 @@ export class StatisticComponent implements OnInit {
     } else if (width < 960) {
       this.view = [500, 300];
     } else {
-      this.view = [700, 400];
+      this.view = [600, 400];
     }
   }
 
@@ -63,9 +45,23 @@ export class StatisticComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
   };
 
-  constructor() {}
+  constructor(private adminService: AdminService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    Promise.all([
+      this.findMostSickness(),
+      this.findUserByAgeGroup(),
+      this.getAverageByAgeGroup(),
+    ])
+      .then(([mostSicknessByAgeGroup, userByAgeGroup, averageByAgeGroup]) => {
+        // console.log('Most Sickness By Age Group:', mostSicknessByAgeGroup);
+        // console.log('User By Age Group:', userByAgeGroup);
+        // console.log('Average By Age Group:', averageByAgeGroup);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }
 
   onSelect(data: any): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
@@ -80,6 +76,49 @@ export class StatisticComponent implements OnInit {
   }
 
   onChartChange(index: number): void {
-    this.selectedChart = this.multiple[index].data;
+    this.selectedChartIndex = index;
+    this.selectedChart = this.sicknesses[index].series;
+  }
+
+  findMostSickness() {
+    this.adminService.findMostSicknessByAgeGroup().subscribe((res) => {
+      this.sicknesses = res.data;
+      this.sicknesses = this.sicknesses.map((group) => ({
+        name: group.age_group,
+        series: group.sickness.map((sick: any) => ({
+          name: sick.sickness_name,
+          value: sick.number_of_people,
+        })),
+      }));
+      this.selectedChart = this.sicknesses[0].series;
+    });
+  }
+
+  findUserByAgeGroup() {
+    this.adminService.findUserByAgeGroup().subscribe((res) => {
+      console.log(res);
+      this.userByAgeGroup = res.data;
+      this.userByAgeGroup = this.userByAgeGroup.map((group) => ({
+        name: group.age_group,
+        value: group.total_users,
+      }));
+      console.log(this.userByAgeGroup);
+    });
+  }
+
+  getAverageByAgeGroup() {
+    this.adminService.getAverageByAgeGroup().subscribe((res) => {
+      console.log(res);
+      this.averageByAgeGroup = res.data;
+      this.averageByAgeGroup = this.averageByAgeGroup.map((group) => ({
+        name: group.age_group,
+        value: group.average_visits,
+      }));
+      console.log(this.averageByAgeGroup);
+    });
+  }
+
+  changeTab(tab: string) {
+    this.tab = tab;
   }
 }

@@ -1,23 +1,45 @@
 <div class="d-flex justify-content-center align-items-center gap-1">
-  <div class="py-2 px-3 rounded-2 bg-secondary text-white fw-medium" style="user-select: none; cursor: pointer;">Thống
-    kê A</div>
-  <div class="py-2 px-3 rounded-2 bg-secondary text-white fw-medium" style="user-select: none; cursor: pointer;">Thống
-    kê B</div>
-  <div class="py-2 px-3 rounded-2 bg-secondary text-white fw-medium" style="user-select: none; cursor: pointer;">Thống
-    kê C</div>
+  <div class="py-2 px-3 rounded-2 bg-secondary text-white fw-medium" style="user-select: none; cursor: pointer;"
+    (click)="changeTab('sickness')">Thống
+    kê loại bệnh</div>
+  <div class="py-2 px-3 rounded-2 bg-secondary text-white fw-medium" style="user-select: none; cursor: pointer;"
+    (click)="changeTab('user')">Thống
+    kê số người bệnh</div>
+  <div class="py-2 px-3 rounded-2 bg-secondary text-white fw-medium" style="user-select: none; cursor: pointer;"
+    (click)="changeTab('average')">Thống
+    kê số lượng lượt khám</div>
 </div>
 
+<h2 class="my-3 text-center fs-4" *ngIf="tab=='sickness'">Biểu đồ thống kê những bệnh bị mắc phải nhiều nhất trong từng
+  độ tuổi</h2>
+<h2 class="my-3 text-center fs-4" *ngIf="tab=='user'">Biểu đồ thống kê số lượng bệnh nhân trong từng độ tuổi</h2>
+<h2 class="my-3 text-center fs-4" *ngIf="tab=='average'">Biểu đồ thống kê trung bình số lần khám theo độ tuổi</h2>
 <div class="row row-gap-2 flex-column-reverse flex-md-row">
-  <div class=" col-md-6">
+  <div class="col-md-6" *ngIf="tab=='sickness'">
     <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="selectedChart" [legend]="showLegend"
       [labels]="showLabels" [doughnut]="isDoughnut" [legendPosition]="legendPosition" (select)="onSelect($event)"
       (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
     </ngx-charts-pie-chart>
   </div>
-  <div class="col-md-6 p-2 d-flex flex-column gap-2 align-items-center align-content-start ">
-    <div *ngFor="let chart of multiple; let i = index">
-      <input type="radio" [id]="'chart' + i" name="chart" (change)="onChartChange(i)" [checked]="i === 0" />
-      <label class="d-inline-block ms-2" [for]="'chart' + i">{{ chart.name }}</label>
+  <div class="col-12" *ngIf="tab=='user'">
+    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="userByAgeGroup" [legend]="showLegend"
+      [labels]="showLabels" [doughnut]="isDoughnut" [legendPosition]="legendPosition" (select)="onSelect($event)"
+      (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+    </ngx-charts-pie-chart>
+  </div>
+  <div class="col-12" *ngIf="tab=='average'">
+    <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="averageByAgeGroup" [legend]="showLegend"
+      [labels]="showLabels" [doughnut]="isDoughnut" [legendPosition]="legendPosition" (select)="onSelect($event)"
+      (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+    </ngx-charts-pie-chart>
+  </div>
+  <div class="col-md-6 p-2" *ngIf="tab=='sickness'">
+    <h5 class="text-center mb-3">Độ tuổi</h5>
+    <div class=" d-flex flex-wrap gap-2 align-items-center justify-content-center mx-auto" style="max-width: 200px;">
+      <div *ngFor="let chart of sicknesses; let i = index" (click)="onChartChange(i)"
+        [class.selected]="i === selectedChartIndex" class="btn btn-success">
+        <div class="d-inline-block ms-2">{{ chart.name }}</div>
+      </div>
     </div>
   </div>
 </div>

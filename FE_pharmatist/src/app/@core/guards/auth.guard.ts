@@ -18,7 +18,11 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (state.url === '/' || state.url.startsWith('/xac-nhan-thong-tin')) {
+    if (
+      state.url === '/' ||
+      state.url.startsWith('/xac-nhan-thong-tin') ||
+      state.url.startsWith('/thong-ke')
+    ) {
       return true;
     }
 

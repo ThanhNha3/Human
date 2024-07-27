@@ -22,6 +22,12 @@ const API_ENDPOINTS = {
   prescription_medicine: '/prescription-medicines',
   ai_record: '/ai-record',
   department: '/departments',
+  admin: {
+    base: '/admin',
+    findSickness: '/findMostSicknessByAgeGroup',
+    findUser: '/findUserByAgeGroup',
+    getAverage: '/getAverageVisitByAgeGroup',
+  },
 };
 
 export { API_BASE_URL, API_ENDPOINTS };
