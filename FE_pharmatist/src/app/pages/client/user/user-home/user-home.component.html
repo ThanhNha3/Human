@@ -36,15 +36,13 @@
             <app-audio-recorder (fileUploaded)="onFileUploaded($event)"></app-audio-recorder>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="card border-0 shadow text-center py-3">
-      <div class="">
-        <i class="fa-solid fa-circle-exclamation text-danger fs-5"></i>        
-        <h3 class="text-danger">Bạn đang mâu thuẫn trong triệu chứng của bạn</h3>
-        <div class="d-flex justify-content-center align-items-center gap-2">
-          <button class="btn btn-secondary">Xác nhận đúng</button>
-          <button class="btn btn-success">Ghi lại</button>
+        <div *ngIf="isConflict" class="border border-2 rounded-2 w-50 my-5 mx-auto border-warning p-3 text-center">
+          <i class="fa-solid fa-triangle-exclamation text-warning fs-1 mb-2"></i>
+          <h3 class="fs-4 my-3">Bạn đang mâu thuẫn trong triệu chứng của bạn</h3>
+          <div class="d-flex justify-content-center align-items-center gap-2">
+            <button class="btn btn-outline-success">Xác nhận đúng</button>
+            <button class="btn btn-success" (click)="setConflictState()">Ghi âm lại</button>
+          </div>
         </div>
       </div>
     </div>

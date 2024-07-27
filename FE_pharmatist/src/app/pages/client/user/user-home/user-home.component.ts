@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class UserHomeComponent implements OnInit {
   showRecorder = false;
+  isConflict = false;
 
   constructor(
     private assemblyAIService: AssemblyAIService,
@@ -74,5 +75,9 @@ export class UserHomeComponent implements OnInit {
         this.router.navigate(['/error']);
       }
     );
+  }
+
+  setConflictState() {
+    this.isConflict = !this.isConflict;
   }
 }
