@@ -28,6 +28,7 @@ const API_ENDPOINTS = {
     findUser: '/findUserByAgeGroup',
     getAverage: '/getAverageVisitByAgeGroup',
   },
+  langchain: '/langchain/predictSickness',
 };
 
 export { API_BASE_URL, API_ENDPOINTS };

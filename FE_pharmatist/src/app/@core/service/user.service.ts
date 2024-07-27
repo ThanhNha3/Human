@@ -35,6 +35,12 @@ export class UserService {
     return this.http.patch(API_BASE_URL + API_ENDPOINTS.user + `/${id}`, data);
   }
 
+  getNewestSickness(userId: number): Observable<any> {
+    return this.http.get(
+      API_BASE_URL + API_ENDPOINTS.user + '/newSymptom/' + userId
+    );
+  }
+
   // deleteUnit(id: number): Observable<any> {
   //   return this.http.delete(apiBaseUrl + API_ENDPOINT.unit + `/${id}`);
   // }
