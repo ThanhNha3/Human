@@ -42,7 +42,7 @@ export class StatisticComponent implements OnInit {
   legendPosition: string = 'below';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+    domain: ['#66FF99', '#00CCFF', '#FF0000', '#FFFF66', '#FF99CC', '#66FF33', '#FF6600', '#FFCC00', '#FF99FF', '#FF6666'],
   };
 
   constructor(private adminService: AdminService) {}

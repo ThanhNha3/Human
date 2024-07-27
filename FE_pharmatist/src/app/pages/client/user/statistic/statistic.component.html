@@ -38,7 +38,7 @@
     <div class=" d-flex flex-wrap gap-2 align-items-center justify-content-center mx-auto" style="max-width: 200px;">
       <div *ngFor="let chart of sicknesses; let i = index" (click)="onChartChange(i)"
         [class.selected]="i === selectedChartIndex" class="btn btn-success">
-        <div class="d-inline-block ms-2">{{ chart.name }}</div>
+        <div class="d-inline-block ms-2" style="width: 160px;">{{ chart.name }}</div>
       </div>
     </div>
   </div>
