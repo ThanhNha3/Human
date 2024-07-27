@@ -159,7 +159,7 @@ export class UserHomeComponent implements OnInit {
     if(this.isLogged){
       this.startRecording();
     }else{
-      this.router.navigate(['/dang-nhap']); 
+      this.router.navigate(['/auth/login']); 
     }
   }
 }
