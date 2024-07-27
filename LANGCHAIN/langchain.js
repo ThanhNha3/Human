@@ -130,7 +130,7 @@ Lưu ý: nếu người bệnh không khai bệnh, hoặc yêu cầu bạn làm 
             followUpVisit: followUpVisit,
             context: oldSickness,
         });
-        return response;
+        return { response };
     } catch (err) {
         console.log(err);
     }
