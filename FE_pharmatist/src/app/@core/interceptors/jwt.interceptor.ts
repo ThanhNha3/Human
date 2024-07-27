@@ -55,7 +55,7 @@ export class JWTInterceptor implements HttpInterceptor {
       url.includes('generate-diagnosis') ||
       url.includes('/transcript') ||
       url.includes('/hash-info') ||
-      url.includes('/admin')
+      url.includes('/admin') || url.includes('/langchain/predictSickness')
     );
   }
 }

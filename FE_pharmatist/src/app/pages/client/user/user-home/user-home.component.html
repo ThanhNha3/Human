@@ -26,7 +26,7 @@
         </div>
         <div class="w-100 d-flex justify-content-center align-items-center gap-2">
           <button class="btn btn-success" (click)="startRecording()">Khám mới</button>
-          <button class="btn btn-outline-success" routerLink="/auth/login">Tái khám</button>
+          <button class="btn btn-outline-success" (click)="resetRecording()">Tái khám</button>
         </div>
         <div *ngIf="showRecorder">
           <h4 class="text-center mt-5 fw-bold text-uppercase text-success">

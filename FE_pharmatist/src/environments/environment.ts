@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3004/api',
+  apiUrl: 'https://api.pharmartist-fpl.xyz/api',
   firebase: {
     apiKey: 'AIzaSyDgYiTfbYmTMoZ0mO2u6vAYuVQdDZS5lb0',
     authDomain: 'pharmacistai.firebaseapp.com',

@@ -69,7 +69,7 @@ export class UserHomeComponent implements OnInit {
             oldSickness: this.newestSickness,
           })
           .subscribe((response) => {
-            if (response.results.response == 'true') {
+            if (response.result.response == 'true') {
               this.chatService
                 .create({ message: message })
                 .subscribe((response) => {
@@ -103,7 +103,7 @@ export class UserHomeComponent implements OnInit {
                 });
             } else {
               this.mainMessage = message;
-              this.conflictMessage = response.results.response;
+              this.conflictMessage = response.result.response;
               this.spinner.hide();
               this.setConflictState();
             }
@@ -153,5 +153,13 @@ export class UserHomeComponent implements OnInit {
         this.spinner.hide();
         this.router.navigate(['/xac-nhan-thong-tin']);
       });
+  }
+
+  resetRecording() {
+    if(this.isLogged){
+      this.startRecording();
+    }else{
+      this.router.navigate(['/dang-nhap']); 
+    }
   }
 }
