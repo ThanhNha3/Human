@@ -15,33 +15,32 @@
               <p>Triệu chứng bệnh - Bệnh nền - Thành phần dị ứng</p>
             </div>
           </div>
-          <!-- <div class="col-lg-6 col-ms-12">
+          <div class="col-lg-6 col-ms-12">
             <div class="text-center">
               <h4 class="text-success mb-2 fs-5 ">Ví dụ</h4>
               <div class="audio-container mx-auto" style="max-width: 300px;">
                 <app-audio-player></app-audio-player>
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
-        <h4 class="text-center mt-5 fw-bold text-uppercase text-success">
-          Nhấn để ghi âm
-        </h4>
-        <div class="d-flex justify-content-center w-100 mt-3">
-          <app-audio-recorder
-            (fileUploaded)="onFileUploaded($event)"
-          ></app-audio-recorder>
+        <div class="w-100 d-flex justify-content-center align-items-center gap-2">
+          <button class="btn btn-success" (click)="startRecording()">Khám mới</button>
+          <button class="btn btn-outline-success" routerLink="/auth/login">Tái khám</button>
+        </div>
+        <div *ngIf="showRecorder">
+          <h4 class="text-center mt-5 fw-bold text-uppercase text-success">
+            Nhấn để ghi âm
+          </h4>
+          <div class="d-flex justify-content-center w-100 mt-3">
+            <app-audio-recorder (fileUploaded)="onFileUploaded($event)"></app-audio-recorder>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<ngx-spinner
-  bdColor=" rgb(255,255,255)"
-  size="medium"
-  color="#198754"
-  type="ball-clip-rotate-pulse"
-  [fullScreen]="true"
->
+<ngx-spinner bdColor=" rgb(255,255,255)" size="medium" color="#198754" type="ball-clip-rotate-pulse"
+  [fullScreen]="true">
   <p class="text-success w-100 mt-lg-5">Hệ thống đang xử lý...</p>
 </ngx-spinner>

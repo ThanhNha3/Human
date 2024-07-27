@@ -1,32 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { forkJoin } from 'rxjs';
 import { AssemblyAIService } from 'src/app/@core/service/assemblyai.service';
-// import { AuthService } from 'src/app/@core/service/auth.service';
 import { ChatService } from 'src/app/@core/service/chat.service';
-// import { UserService } from 'src/app/@core/service/user.service';
 import { VoiceInputService } from 'src/app/@core/service/voice-input.service';
-
-// import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-// import { PrescriptionService } from 'src/app/@core/service/prescription.service';
 import { DataSharingService } from 'src/app/@core/service/common/data-sharing.service';
 import { Router } from '@angular/router';
-
-// interface IInfo {
-//   fullname: string;
-//   age: number;
-//   gender: string;
-//   phone: string;
-//   symptom: string;
-//   underlying_condition: string | null;
-//   allergic: string[];
-// }
-
-// interface IDiagnosis {
-//   name: string;
-//   probability: number;
-//   department: string;
-// }
 
 @Component({
   selector: 'app-user-home',
@@ -34,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-home.component.scss'],
 })
 export class UserHomeComponent implements OnInit {
+  showRecorder = false;
+
   constructor(
     private assemblyAIService: AssemblyAIService,
     private voiceInputService: VoiceInputService,
@@ -44,6 +24,10 @@ export class UserHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  startRecording() {
+    this.showRecorder = true;
+  }
 
   onFileUploaded(fileURL: string) {
     this.spinner.show();
